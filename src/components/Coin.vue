@@ -1,11 +1,12 @@
 <template>
-    <div class="coin-container" @click="startFlip" role="button" tabindex="0">
-        <div ref="coin" class="coin">
-            <div class="side heads">Heads</div>
-            <div class="side tails">Tails</div>
-        </div>
-        <p class="mt-4 text-sm text-gray-500">Click the coin to flip</p>
+  <div class="coin-container" @click="startFlip" role="button" tabindex="0" @keydown.space.prevent="startFlip"
+    @keydown.enter.prevent="startFlip">
+    <div ref="coin" class="coin">
+      <div class="side heads">Heads</div>
+      <div class="side tails">Tails</div>
     </div>
+    <p class="mt-4 text-sm text-gray-500">Click the coin to flip</p>
+  </div>
 </template>
 
 <script setup>
@@ -46,44 +47,44 @@ function startFlip() {
 
 <style scoped>
 .coin-container {
-    perspective: 1000px;
-    cursor: pointer;
-    user-select: none;
-    width: 150px;
-    margin: 0 auto;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+  width: 150px;
+  margin: 0 auto;
 }
 
 .coin {
-    width: 150px;
-    height: 150px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
 }
 
 .side {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: white;
-    user-select: none;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+  user-select: none;
 }
 
 .heads {
-    background: linear-gradient(135deg, #4ade80, #16a34a);
-    /* green */
+  background: linear-gradient(135deg, #4ade80, #16a34a);
+  /* green */
 }
 
 .tails {
-    background: linear-gradient(135deg, #f87171, #b91c1c);
-    /* red */
-    transform: rotateY(180deg);
+  background: linear-gradient(135deg, #f87171, #b91c1c);
+  /* red */
+  transform: rotateY(180deg);
 }
 </style>

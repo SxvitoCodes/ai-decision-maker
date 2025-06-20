@@ -6,7 +6,12 @@
 
     <Coin v-if="stage === 'flipping'" @finished="showResult" :choice="userChoice" />
 
-    <Result v-if="stage === 'result'" :choice="userChoice" :result="flipResult" :ai-response="aiResponse" @reset="reset" />
+    <div v-if="isLoading" class="mt-6 text-gray-500 animate-pulse">
+      🤔 Thinking...
+    </div>
+
+    <Result v-if="stage === 'result'" :choice="userChoice" :result="flipResult" :ai-response="aiResponse"
+      @reset="reset" />
   </main>
 </template>
 
@@ -17,27 +22,50 @@ import Coin from './components/Coin.vue'
 import Result from './components/Result.vue'
 
 const stage = ref('input') // input | flipping | result
+const isLoading = ref(false);
 const userChoice = ref('')
 const flipResult = ref('')
 const aiResponse = ref('')
 
+function sanitizeInput(text) {
+  return text
+    .trim()                      // Remove leading/trailing spaces
+    .slice(0, 200)               // Limit to 200 chars
+    .replace(/</g, "&lt;")       // Escape < to avoid HTML injection
+    .replace(/>/g, "&gt;")
+    .replace(/\s+/g, ' ');       // Normalize multiple spaces
+}
+
 function startFlip(choice) {
-  userChoice.value = choice
+  userChoice.value = sanitizeInput(choice);
   stage.value = 'flipping'
 }
 
 async function showResult(choice, result) {
+  isLoading.value = true;
   try {
-    const prompt = `The user is deciding: "${choice}". The coin landed on ${result.toUpperCase()}. Respond with a witty, creative, and thoughtful answer to support this decision.`;
+    const prompt = `
+      You are a wise, funny, and supportive life decision assistant.
+      A person is trying to decide: "${choice}".
+      The coin landed on: ${result.toUpperCase()}.
+      - If HEADS: support the decision positively, give encouragement.
+      - If TAILS: advise against it, warn them gently, or offer a humorous alternative.
+      
+      Be supportive, but do not contradict the coin’s decision.
+      Keep the response under 50 words. Don't make medical, legal, or financial claims.
+      `;
 
     const response = await puter.ai.chat(prompt);
 
     flipResult.value = result;
     aiResponse.value = response.message.content; // or just `response.message`
     userChoice.value = choice;
-    stage.value = 'result';
   } catch (err) {
     console.error('AI error:', err);
+    aiResponse.value = 'Oops! Something went wrong.';
+  } finally {
+    isLoading.value = false;
+    stage.value = 'result';
   }
 }
 
