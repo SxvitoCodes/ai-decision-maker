@@ -26,19 +26,19 @@ function startFlip(choice) {
   stage.value = 'flipping'
 }
 
-async function showResult(result) {
-  flipResult.value = result
-  stage.value = 'result'
+async function showResult(choice, result) {
+  try {
+    const prompt = `The user is deciding: "${choice}". The coin landed on ${result.toUpperCase()}. Respond with a witty, creative, and thoughtful answer to support this decision.`;
 
-  const res = await fetch('https://your-cloudflare-worker-url.com', {
-    method: 'POST',
-    body: JSON.stringify({
-      choice: userChoice.value,
-      result,
-    }),
-  })
-  const data = await res.json()
-  aiResponse.value = data.text
+    const response = await puter.ai.chat(prompt);
+
+    flipResult.value = result;
+    aiResponse.value = response.message.content; // or just `response.message`
+    userChoice.value = choice;
+    stage.value = 'result';
+  } catch (err) {
+    console.error('AI error:', err);
+  }
 }
 
 function reset() {
