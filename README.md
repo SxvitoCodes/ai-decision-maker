@@ -6,7 +6,6 @@
 	<em><code>❯ Gamble away your life with AI</code></em>
 </p>
 <p align="center">
-	<img src="https://img.shields.io/github/license/SxvitoCodes/ai-decision-maker?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/SxvitoCodes/ai-decision-maker?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/SxvitoCodes/ai-decision-maker?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/SxvitoCodes/ai-decision-maker?style=default&color=0080ff" alt="repo-language-count">
@@ -38,23 +37,19 @@
 
 ##  Overview
 
-<code>
-🎲 A simple and fun web app to help users make life decisions.  
-Write your question, flip a virtual coin with animation, and get an AI-generated thoughtful response based on the coin result — no login required.
-</code>
+<code>🎲 A simple and fun web app to help users make life decisions.  
+Write your question, flip a virtual coin with animation, and get an AI-generated thoughtful response based on the coin result — no login required.</code>
 
 ---
 
 ##  Features
 
-<code>
-- Clean, minimal Vue 3 + Vite frontend with Tailwind CSS styling  
+<code>- Clean, minimal Vue 3 + Vite frontend with Tailwind CSS styling  
 - Smooth coin flip animation using animejs  
 - AI-powered responses using [Puter.js](https://js.puter.com/) or Cloudflare Workers with OpenAI (configurable)  
 - No user login, fully anonymous  
 - Lightweight and fast with a focus on performance  
-- Input validation and basic security checks  
-</code>
+- Input validation and basic security checks</code>
 
 ---
 
@@ -165,24 +160,22 @@ Install ai-decision-maker using one of the following methods:
 
 1. Clone the ai-decision-maker repository:
 ```sh
-❯ git clone https://github.com/SxvitoCodes/ai-decision-maker
+git clone https://github.com/SxvitoCodes/ai-decision-maker
 ```
 
 2. Navigate to the project directory:
 ```sh
-❯ cd ai-decision-maker
+cd ai-decision-maker
 ```
 
 3. Install the project dependencies:
 
 
-**Using `npm`** &nbsp; [<img align="center" src="" />]()
+**Using `npm`** &nbsp;
 
 ```sh
-❯ echo 'npm install'
+npm install
 ```
-
-
 
 
 ###  Usage
@@ -190,7 +183,7 @@ Run ai-decision-maker using the following command:
 **Using `npm`** &nbsp; [<img align="center" src="" />]()
 
 ```sh
-❯ echo 'npm run dev'
+npm run dev
 ```
 
 ---
